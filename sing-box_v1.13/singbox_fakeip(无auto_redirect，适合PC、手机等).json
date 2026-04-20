@@ -51,13 +51,13 @@
         "mode": "or",
         "rules": [
           {
+            "rule_set": "cnsite"
+          },
+          {
             "domain_suffix": ["ileidian.com", ".cn"]
           },
           {
             "domain_keyword": ["stun", "turn"]
-          },
-          {
-            "rule_set": "cnsite"
           }
         ],
         "server": "cn_dns"
@@ -77,7 +77,15 @@
       "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
       "mtu": 9000,
       "auto_route": true,
-      "route_exclude_address": ["10.0.0.0/8", "100.64.0.0/10", "169.254.0.0/16", "172.16.0.0/12", "192.0.0.0/24", "192.168.0.0/16"],
+      "route_exclude_address": [
+        "10.0.0.0/8",
+        "127.0.0.0/8",
+        "100.64.0.0/10",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.168.0.0/16"
+      ],
       "route_exclude_address_set": ["cnip"],
       "strict_route": true,
       "endpoint_independent_nat": false,
@@ -157,7 +165,9 @@
         "tag": "cnsite",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/sing/geo/geosite/cn.srs"
+        "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/sing/geo/geosite/cn.srs",
+        "update_interval": "24h",
+        "download_detour": "Default"
       },
       {
         "tag": "cnip",
@@ -325,10 +335,6 @@
       {
         "clash_mode": "global",
         "outbound": "Default"
-      },
-      {
-        "protocol": "quic",
-        "action": "reject"
       },
       {
         "protocol": "bittorrent",
